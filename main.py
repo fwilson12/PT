@@ -4,6 +4,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 Builder.load_file("PitchGrid.kv")
 
+pitch_list = []
+
 
 class Pitch():
     def __init__(self, ptype, mph, rpms, intendedloc, resultloc):
@@ -30,22 +32,25 @@ class GridScreen(Screen):
 
     def gotoinput(self):
         if self.count % 2 == 0:
-            self.manager.current = 'login'
+            self.manager.current = 'Input'
         self.count += 1
 
 
 class InputScreen(Screen):
-    def pitchdata(self, ptype, mph, rpms, intendedloc, resultloc, plist):
-        p = Pitch(ptype, mph, rpms, intendedloc, resultloc)
-        plist.append(p)
-        self.manager.current = 'Grid'
-        return plist
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.pitch_list = []
 
+    def pitchdata(self, ptype, mph, rpms, intendedloc, resultloc):
+        p = Pitch(ptype, mph, rpms, intendedloc, resultloc)
+        self.pitch_list.append(p)
+        self.manager.current = 'Grid'
+        print(self.pitch_list)
+        return self.pitch_list
 
 
 class FinalScreen(Screen):
     pass
 
 
-pitch_list = []
 PitchGridApp().run()

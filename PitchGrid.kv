@@ -141,3 +141,39 @@
             size_hint: .5,.5
             background_color: .1,1,.1,1
             on_release: root.gotoinput()
+<InputScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Pitch Type'
+            TextInput:
+                id: type
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Pitch Speed'
+            TextInput:
+                id: speed
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'RPMs'
+            TextInput:
+                id: spin
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Intended Location'
+            TextInput:
+                id: intended_loc
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Result Location'
+            TextInput:
+                id: result_loc
+        Button:
+            text: 'Confirm'
+            on_release: root.pitchdata(type.text, int(speed.text), int(spin.text), int(intended_loc.text), int(result_loc.text))
